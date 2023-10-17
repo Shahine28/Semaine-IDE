@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+    public bool canMoveInDiagonal;
+    public bool canJump;
+    public bool canStopMove;
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
@@ -29,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform orientation;
 
-    float horizontalInput;
+    public float horizontalInput;
     float verticalInput;
 
     Vector3 moveDirection;
@@ -37,8 +40,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField] InputGame _playerInput;
-    private Vector2 _movementInput;
+    public Vector2 _movementInput;
     bool _jumpButton;
+    public float previousHorizontalInput = 0f;
 
     private void Start()
     {
@@ -70,8 +74,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        horizontalInput = _movementInput.x;
-        verticalInput = _movementInput.y;
+
+
 
         // when to jump
         if (_jumpButton && readyToJump && grounded)
@@ -87,16 +91,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // calculate movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        if (canMoveInDiagonal)
+        {
+            // calculate movement direction
+            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // on ground
-        if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            // on ground
+            if (grounded)
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
-        // in air
-        else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            // in air
+            else if (!grounded)
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+        else
+        {
+            
+            
+            if (grounded)
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+            // in air
+            else if (!grounded)
+                rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+
     }
 
     private void SpeedControl()
@@ -113,10 +132,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        // reset y velocity
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        if (canJump)
+        {
+            // reset y velocity
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
     }
     private void ResetJump()
     {
@@ -126,6 +148,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         _movementInput = context.ReadValue<Vector2>();
+        if (context.started)
+        {
+            horizontalInput = _movementInput.x;
+            moveDirection = orientation.right * horizontalInput + orientation.forward * 1;
+        } 
     }
 
     public void OnJump(InputAction.CallbackContext context)
