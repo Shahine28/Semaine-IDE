@@ -1,21 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerPower : MonoBehaviour
 {
+    [SerializeField] Collider m_collider;
+    [SerializeField] LayerMask m_wallLayer;
+    [SerializeField] LayerMask m_nothingLayer;
     string m_currentItem;
 
     public delegate void OnItemGetDelegate(string itemName);
     public static event OnItemGetDelegate OnItemGet;
+
+    public delegate void OnItemUsedDelegate();
+    public static event OnItemUsedDelegate OnItemUsed;
 
     public bool RecoverCollectable(string collectType)
     {
         if (m_currentItem == null)
         {
             m_currentItem = collectType;
-            OnItemGet.Invoke(m_currentItem);
+            //OnItemGet.Invoke(m_currentItem);
+            Debug.Log("call event OnItemGet");
             return true;
         }
         else
@@ -30,16 +35,12 @@ public class PlayerPower : MonoBehaviour
         {
             switch (m_currentItem)
             {
-                case "Jump":
-                    JumpBoost();
-                    break;
-
-                case "Speed":
-                    SpeedBoost();
+                case "Dash":
+                    DashBoost();
                     break;
 
                 case "Invisibility":
-                    InvisibilityBoost();
+                    StartCoroutine(InvisibilityBoost());
                     break;
 
                 default:
@@ -54,19 +55,24 @@ public class PlayerPower : MonoBehaviour
     }
 
     //=== Boost Action ===//
-    private void JumpBoost()
+    private void DashBoost()
     {
-        Debug.Log("Jump Activated");
+        Debug.Log("Dash Activated");
+
+
+        //OnItemUsed.Invoke();
     }
 
-    private void SpeedBoost()
-    {
-        Debug.Log("Speed Activated");
-    }
-
-    private void InvisibilityBoost()
+    IEnumerator InvisibilityBoost()
     {
         Debug.Log("Invisibility Activated");
+        m_collider.excludeLayers = m_wallLayer;
+        yield return new WaitForSeconds(3f);
+        m_collider.excludeLayers = m_nothingLayer;
+
+        //OnItemUsed.Invoke();
+
+        yield return null;
     }
 
     //=== No Boost ===//

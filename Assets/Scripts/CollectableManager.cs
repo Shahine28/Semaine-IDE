@@ -3,10 +3,11 @@ using UnityEngine;
 public class CollectableManager : MonoBehaviour
 {
     [SerializeField] GameObject[] m_boostList;
-    [SerializeField] float m_timeInterval = 10f;
+    [SerializeField] float m_timeInterval = 20f;
     float m_currentTime = 0f;
 
-    [SerializeField] float minX, maxX, minY, maxY;
+    [SerializeField] float minX, maxX, minZ, maxZ;
+    float spawnOffset = 10f;
 
     private void FixedUpdate()
     {
@@ -21,7 +22,9 @@ public class CollectableManager : MonoBehaviour
 
     private void InitializeBoost()
     {
-        GameObject current = Instantiate(m_boostList[Random.Range(1, m_boostList.Length) - 1]);
-        current.transform.position = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 20f);
+        GameObject current = Instantiate(m_boostList[Random.Range(0, m_boostList.Length)]);
+        current.transform.position = new Vector3(Random.Range(minX + spawnOffset, maxX - spawnOffset),
+                                                 50f, 
+                                                 Random.Range(minZ + spawnOffset, maxZ - spawnOffset));
     }
 }
