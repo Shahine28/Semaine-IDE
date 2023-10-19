@@ -31,7 +31,7 @@ public class MeshGenerator : MonoBehaviour
     // Longueur maximale souhaitée pour le mesh.
     public float maxMeshLength = 10.0f; // Réglez cette valeur en fonction de vos besoins.
 
-    [Button("Destroy first vertices")]
+
     // Start is called before the first frame update
     void Start()
     {
@@ -204,7 +204,7 @@ public class MeshGenerator : MonoBehaviour
         }
         else
         {
-            if (totalMeshLength > maxMeshLength) x = 400;
+            
             meshCollider.sharedMesh = meshFilter.mesh;
             verticesDef.Add(backward + (player.transform.right * -width) + player.transform.up * width);
             verticesDef.Add(backward - (player.transform.right * -width) + player.transform.up * width);
@@ -259,32 +259,35 @@ public class MeshGenerator : MonoBehaviour
             isEven = true;
         }
 
-        if (totalMeshLength < maxMeshLength) x += 4;
+        x += 4;
 
 
         totalMeshLength += width;
 
+        int maxTrianglesToAdd = (verticesDef.Count / 4) * 2;
+        int trianglesToRemove = Mathf.Max(18, maxTrianglesToAdd);
+        
 
         while (totalMeshLength > maxMeshLength)
         {
-
+            // Supprime les sommets et les triangles excédentaires du début.
             verticesDef.RemoveRange(0, 4);
-            trianglesDef.RemoveRange(0, 6);
+            trianglesDef.RemoveRange(0, trianglesToRemove);
+           
 
-            totalMeshLength -= width;
-
+            // Mettez à jour les indices des triangles restants en soustrayant 4.
             for (int i = 0; i < trianglesDef.Count; i++)
             {
-                trianglesDef[i] -= 6;
+                trianglesDef[i] -= 4;
             }
 
-            
+            totalMeshLength -= width;
         }
-        meshFilter.mesh.SetVertices(verticesDef);
-        meshFilter.mesh.SetTriangles(trianglesDef, 0);
-        
-        //meshFilter.mesh.vertices = verticesDef.ToArray();
-        //meshFilter.mesh.triangles = trianglesDef.ToArray();
+
+        meshFilter.mesh.vertices = verticesDef.ToArray();
+        meshFilter.mesh.triangles = trianglesDef.ToArray();
+
+
 
         //Debug.Log($"Current count1 {meshFilter.mesh.triangles.Length}");
         //Debug.Log($"Current count2 {meshFilter.mesh.vertices.Length}");
