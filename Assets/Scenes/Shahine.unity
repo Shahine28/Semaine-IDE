@@ -2722,10 +2722,11 @@ MonoBehaviour:
   spawnTime: 0
   monoSpawnDisplay: 0.1
   firstTime: 1
-  isEven: 1
+  isEven: 0
   width: 0.05
   player: {fileID: 505462522}
   tempMaterial: {fileID: 2100000, guid: 17f3866cd8629444dafa9187b04c4605, type: 2}
+  maxMeshLength: 5
 --- !u!4 &1356006281
 Transform:
   m_ObjectHideFlags: 0

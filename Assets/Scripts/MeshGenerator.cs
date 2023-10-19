@@ -1,8 +1,5 @@
 using NaughtyAttributes;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class MeshGenerator : MonoBehaviour
@@ -19,18 +16,27 @@ public class MeshGenerator : MonoBehaviour
     [SerializeField] private GameObject player;
     private GameObject line;
     [SerializeField] private Material tempMaterial;
+
+
     private List<Vector3> verticesDef = new List<Vector3>();
     private List<int> trianglesDef = new List<int>();
 
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;
 
-    [Button ("Destroy first vertices")]
+    // Déclarez une variable pour suivre la longueur totale du mesh.
+    private float totalMeshLength = 0.0f;
+    private int cubeCount = 0;
+
+    // Longueur maximale souhaitée pour le mesh.
+    public float maxMeshLength = 10.0f; // Réglez cette valeur en fonction de vos besoins.
+
+    [Button("Destroy first vertices")]
     // Start is called before the first frame update
     void Start()
     {
         firstTime = true;
-        CreateCube();
+/*        CreateCube();*/
     }
 
     private void CreateCube()
@@ -45,14 +51,14 @@ public class MeshGenerator : MonoBehaviour
 
         Vector3[] vertices =
         {
-            new Vector3 (0,0,0),
-            new Vector3 (1,0,0),
-            new Vector3 (1,1,0),
-            new Vector3 (0,1,0),
-            new Vector3 (0,1,1),
-            new Vector3 (1,1,1),
-            new Vector3 (1,0,1),
-            new Vector3 (0,0,1),
+            new Vector3(0,0,0),
+            new Vector3(1,0,0),
+            new Vector3(1,1,0),
+            new Vector3(0,1,0),
+            new Vector3(0,1,1),
+            new Vector3(1,1,1),
+            new Vector3(1,0,1),
+            new Vector3(0,0,1),
         };
 
         meshFilter.mesh.vertices = vertices;
@@ -66,12 +72,11 @@ public class MeshGenerator : MonoBehaviour
             1,2,5, // right face
             1,5,6,
             0,7,4, // left face
-            0,4,3, 
+            0,4,3,
             5,4,7, // back face
             5,7,6,
             0,6,7, // bottom face
             0,1,6
-
         };
 
         meshFilter.mesh.triangles = triangles;
@@ -82,7 +87,7 @@ public class MeshGenerator : MonoBehaviour
     {
         if (weaponEnabled)
         {
-            if( Time.time > spawnTime )
+            if (Time.time > spawnTime)
             {
                 spawnTime = Time.time + monoSpawnDisplay;
                 MonoLine();
@@ -105,13 +110,12 @@ public class MeshGenerator : MonoBehaviour
                 backward - (player.transform.right * -width),
                 backward - (player.transform.right * -width) + player.transform.up * width,
                 backward + (player.transform.right * -width) + player.transform.up * width
-
             };
 
             triangles = new int[]
             {
-                0,2,1, // face front;
-                0,3,2,
+                0, 2, 1, // face front;
+                0, 3, 2,
             };
 
             line = new GameObject();
@@ -130,8 +134,8 @@ public class MeshGenerator : MonoBehaviour
 
             verticesDef = new List<Vector3>();
             trianglesDef = new List<int>();
-            foreach (var ver in vertices) verticesDef.Add(ver);
-            foreach (var tri in triangles) trianglesDef.Add(tri);
+            verticesDef.AddRange(vertices);
+            trianglesDef.AddRange(triangles);
 
             isEven = false;
             firstTime = false;
@@ -149,6 +153,7 @@ public class MeshGenerator : MonoBehaviour
             verticesDef.Add(backward - (player.transform.right * -width) + player.transform.up * width);
             verticesDef.Add(backward + (player.transform.right * -width) + player.transform.up * width);
 
+            if (totalMeshLength > maxMeshLength) x = 400;
             //left face 
             trianglesDef.Add(x - 4);
             trianglesDef.Add(x - 1);
@@ -159,7 +164,7 @@ public class MeshGenerator : MonoBehaviour
             trianglesDef.Add(x + 3);
 
             //top face
-            trianglesDef.Add(x - 4); 
+            trianglesDef.Add(x - 4);
             trianglesDef.Add(x + 3);
             trianglesDef.Add(x + 2);
 
@@ -177,7 +182,7 @@ public class MeshGenerator : MonoBehaviour
             trianglesDef.Add(x - 2);
 
             // bottom face
-/*            trianglesDef.Add(x - 2);
+/*          trianglesDef.Add(x - 2);
             trianglesDef.Add(x + 1);
             trianglesDef.Add(x);
 
@@ -194,10 +199,12 @@ public class MeshGenerator : MonoBehaviour
             trianglesDef.Add(x + 2);
             trianglesDef.Add(x + 3);*/
 
+
             isEven = false;
         }
         else
         {
+            if (totalMeshLength > maxMeshLength) x = 400;
             meshCollider.sharedMesh = meshFilter.mesh;
             verticesDef.Add(backward + (player.transform.right * -width) + player.transform.up * width);
             verticesDef.Add(backward - (player.transform.right * -width) + player.transform.up * width);
@@ -232,7 +239,7 @@ public class MeshGenerator : MonoBehaviour
             trianglesDef.Add(x + 2);
 
             // bottom face
-/*            trianglesDef.Add(x - 3);
+    /*      trianglesDef.Add(x - 3);
             trianglesDef.Add(x + 2);
             trianglesDef.Add(x + 3);
 
@@ -241,7 +248,7 @@ public class MeshGenerator : MonoBehaviour
             trianglesDef.Add(x - 4);*/
 
             //back face
-    /*            trianglesDef.Add(x);
+    /*      trianglesDef.Add(x);
             trianglesDef.Add(x + 3);
             trianglesDef.Add(x + 2);
 
@@ -252,11 +259,35 @@ public class MeshGenerator : MonoBehaviour
             isEven = true;
         }
 
-        x += 4;
-        meshFilter.mesh.vertices = verticesDef.ToArray();
-        meshFilter.mesh.triangles = trianglesDef.ToArray();
-       
+        if (totalMeshLength < maxMeshLength) x += 4;
+
+
+        totalMeshLength += width;
+
+
+        while (totalMeshLength > maxMeshLength)
+        {
+
+            verticesDef.RemoveRange(0, 4);
+            trianglesDef.RemoveRange(0, 6);
+
+            totalMeshLength -= width;
+
+            for (int i = 0; i < trianglesDef.Count; i++)
+            {
+                trianglesDef[i] -= 6;
+            }
+
+            
+        }
+        meshFilter.mesh.SetVertices(verticesDef);
+        meshFilter.mesh.SetTriangles(trianglesDef, 0);
         
-        
+        //meshFilter.mesh.vertices = verticesDef.ToArray();
+        //meshFilter.mesh.triangles = trianglesDef.ToArray();
+
+        //Debug.Log($"Current count1 {meshFilter.mesh.triangles.Length}");
+        //Debug.Log($"Current count2 {meshFilter.mesh.vertices.Length}");
+        //Debug.Log($"Current count3 {meshFilter.mesh.vertexCount}");
     }
 }
