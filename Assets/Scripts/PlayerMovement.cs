@@ -74,7 +74,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-
+        if (canMoveInDiagonal)
+        {
+            horizontalInput = _movementInput.x;
+            verticalInput = _movementInput.y;
+        }
 
 
         // when to jump
@@ -109,11 +113,11 @@ public class PlayerMovement : MonoBehaviour
             
             
             if (grounded)
-                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+                rb.AddForce(transform.forward * moveSpeed * 10f, ForceMode.Force);
 
             // in air
             else if (!grounded)
-                rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+                rb.AddForce(transform.forward * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
 
     }
@@ -148,10 +152,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         _movementInput = context.ReadValue<Vector2>();
-        if (context.started)
+        if (context.started && !canMoveInDiagonal)
         {
             horizontalInput = _movementInput.x;
-            moveDirection = orientation.right * horizontalInput + orientation.forward * 1;
+            transform.Rotate(0, 90f * horizontalInput, 0);
+            Debug.Log(moveDirection);
         } 
     }
 
