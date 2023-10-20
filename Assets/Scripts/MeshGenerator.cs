@@ -31,7 +31,10 @@ public class MeshGenerator : MonoBehaviour
     // Longueur maximale souhaitée pour le mesh.
     public float maxMeshLength = 10.0f; // Réglez cette valeur en fonction de vos besoins.
 
-
+    private void Awake()
+    {
+        player = gameObject.transform.parent.gameObject;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -264,21 +267,19 @@ public class MeshGenerator : MonoBehaviour
 
         totalMeshLength += width;
 
-        int maxTrianglesToAdd = (verticesDef.Count / 4) * 2;
-        int trianglesToRemove = Mathf.Max(18, maxTrianglesToAdd);
         
 
         while (totalMeshLength > maxMeshLength)
         {
             // Supprime les sommets et les triangles excédentaires du début.
             verticesDef.RemoveRange(0, 4);
-            trianglesDef.RemoveRange(0, trianglesToRemove);
+            trianglesDef.RemoveRange(0, 18);
            
 
             // Mettez à jour les indices des triangles restants en soustrayant 4.
             for (int i = 0; i < trianglesDef.Count; i++)
             {
-                trianglesDef[i] -= 4;
+                trianglesDef[i] -= 18;
             }
 
             totalMeshLength -= width;
