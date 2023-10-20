@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2387592348588283062}
   - component: {fileID: 458819550394695758}
   - component: {fileID: 1126823116993977537}
+  - component: {fileID: 7566510440667952330}
   m_Layer: 5
   m_Name: ingame droite
   m_TagString: Untagged
@@ -104,6 +105,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7566510440667952330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596858320082911277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02fcbed374c8ac34089bd2abf09df7ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_slot: {fileID: 7735050028827181969}
+  m_dashIcon: {fileID: 1819122290208761130}
+  m_invisibilityIcon: {fileID: 687341450132067149}
 --- !u!1 &687341450132067149
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2879311225253919414
 RectTransform:
   m_ObjectHideFlags: 0
@@ -196,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &655551556863728340
 RectTransform:
   m_ObjectHideFlags: 0

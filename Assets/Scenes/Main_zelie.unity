@@ -962,6 +962,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fond bleu ui
       objectReference: {fileID: 0}
+    - target: {fileID: 7102213293974627591, guid: eff6f871347c0f040bab6a1e1bcfd996,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
