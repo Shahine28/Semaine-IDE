@@ -4,14 +4,16 @@ using UnityEngine;
 public class PlayerPower : MonoBehaviour
 {
     [SerializeField] Collider m_collider;
-    [SerializeField] LayerMask m_wallLayer;
+
+    [Header("Layer Mask")]
+    [SerializeField] LayerMask m_laserLayer;
     [SerializeField] LayerMask m_nothingLayer;
     string m_currentItem;
 
-    public delegate void OnItemGetDelegate(string itemName);
+    public delegate void OnItemGetDelegate(string itemName, string playerTag);
     public static event OnItemGetDelegate OnItemGet;
 
-    public delegate void OnItemUsedDelegate();
+    public delegate void OnItemUsedDelegate(string playerTag);
     public static event OnItemUsedDelegate OnItemUsed;
 
     public bool RecoverCollectable(string collectType)
@@ -19,17 +21,18 @@ public class PlayerPower : MonoBehaviour
         if (m_currentItem == null)
         {
             m_currentItem = collectType;
-            //OnItemGet.Invoke(m_currentItem);
-            Debug.Log("call event OnItemGet");
+            OnItemGet.Invoke(m_currentItem, transform.tag);
+            Debug.Log("Item Set " + m_currentItem);
             return true;
         }
         else
         {
+            Debug.Log("No Item Set");
             return false;
         }
     }
 
-    public void ItemUse(string m_currentItem)
+    public void ItemUse()
     {
         if (m_currentItem != null)
         {
@@ -59,18 +62,19 @@ public class PlayerPower : MonoBehaviour
     {
         Debug.Log("Dash Activated");
 
-
-        //OnItemUsed.Invoke();
+        m_currentItem = null;
+        OnItemUsed.Invoke(transform.tag);
     }
 
     IEnumerator InvisibilityBoost()
     {
         Debug.Log("Invisibility Activated");
-        m_collider.excludeLayers = m_wallLayer;
+        m_collider.excludeLayers = m_laserLayer;
         yield return new WaitForSeconds(3f);
         m_collider.excludeLayers = m_nothingLayer;
 
-        //OnItemUsed.Invoke();
+        m_currentItem = null;
+        OnItemUsed.Invoke(transform.tag);
 
         yield return null;
     }

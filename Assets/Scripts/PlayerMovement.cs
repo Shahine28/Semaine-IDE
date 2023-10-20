@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -104,10 +103,6 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0;
     }
 
-    private void FixedUpdate()
-    {
-    }
-
     private void MyInput()
     {
         //if (canMoveInDiagonal)
@@ -199,5 +194,4 @@ public class PlayerMovement : MonoBehaviour
             _jumpButton = false;
         }
     }
-
 }
