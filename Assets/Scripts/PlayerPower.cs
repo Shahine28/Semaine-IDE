@@ -6,7 +6,7 @@ public class PlayerPower : MonoBehaviour
     [SerializeField] Collider m_collider;
 
     [Header("Layer Mask")]
-    [SerializeField] LayerMask m_wallLayer;
+    [SerializeField] LayerMask m_laserLayer;
     [SerializeField] LayerMask m_nothingLayer;
     string m_currentItem;
 
@@ -69,7 +69,7 @@ public class PlayerPower : MonoBehaviour
     IEnumerator InvisibilityBoost()
     {
         Debug.Log("Invisibility Activated");
-        m_collider.excludeLayers = m_wallLayer;
+        m_collider.excludeLayers = m_laserLayer;
         yield return new WaitForSeconds(3f);
         m_collider.excludeLayers = m_nothingLayer;
 

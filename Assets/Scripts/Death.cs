@@ -24,7 +24,7 @@ public class Death : MonoBehaviour
         {
             m_isDead = true;
             //StopPlayer
-            //OnDeath.Invoke();
+            OnDeath.Invoke();
 
             StartCoroutine(DeathAnimation());
             Destroy(gameObject);

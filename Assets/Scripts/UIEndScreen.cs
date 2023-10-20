@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using EndGameManagerSpace;
 
 public class UIEndScreen : MonoBehaviour
 {
@@ -10,12 +10,20 @@ public class UIEndScreen : MonoBehaviour
     [SerializeField] GameObject m_playButton;
     [SerializeField] GameObject m_quitButton;
 
+    [Header("Play Sprite")]
+    [SerializeField] Sprite m_playBlue;
+    Image m_playButtonSprite;
+
+    bool m_isPlayPressed = false;
+
     private void Start()
     {
         m_winScreen.SetActive(false);
         m_loseScreen.SetActive(false);
         m_playButton.SetActive(false);
         m_quitButton.SetActive(false);
+
+        m_playButtonSprite = m_playButton.GetComponent<Image>();
     }
 
     public void ActiveElements(bool isDead)
@@ -25,5 +33,21 @@ public class UIEndScreen : MonoBehaviour
 
         m_playButton.SetActive(true);
         m_quitButton.SetActive(true);
+    }
+
+    public void PressPlay()
+    {
+        if (!m_isPlayPressed)
+        {
+            EndGameManager.Instance.ReplayCondition();
+            m_playButtonSprite.sprite = m_playBlue;
+
+            m_isPlayPressed = true;
+        }
+    }
+
+    public void PressQuit()
+    {
+        EndGameManager.Instance.QuitGame();
     }
 }
