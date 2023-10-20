@@ -454,6 +454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4112826072370399372, guid: d5ce32e10c5d2bd45b36b056d427631e,
         type: 3}
+      propertyPath: offset
+      value: 0.275
+      objectReference: {fileID: 0}
+    - target: {fileID: 4112826072370399372, guid: d5ce32e10c5d2bd45b36b056d427631e,
+        type: 3}
       propertyPath: offsetY
       value: -1
       objectReference: {fileID: 0}
@@ -594,6 +599,11 @@ PrefabInstance:
         type: 3}
       propertyPath: cameraPosition.z
       value: -20.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214867323534645125, guid: 9d4c7cd8620d22c48ad5c900214fb625,
+        type: 3}
+      propertyPath: offset
+      value: 0.275
       objectReference: {fileID: 0}
     - target: {fileID: 6214867323534645125, guid: 9d4c7cd8620d22c48ad5c900214fb625,
         type: 3}
