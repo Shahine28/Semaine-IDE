@@ -31,6 +31,7 @@ public class MeshGenerator : MonoBehaviour
     private float totalMeshLength = 0.0f;
     private int cubeCount = 0;
     [SerializeField] private float offset;
+    [SerializeField] private float offsetY;
 
     // Longueur maximale souhaitée pour le mesh.
     public float maxMeshLength = 10.0f; // Réglez cette valeur en fonction de vos besoins.
@@ -44,7 +45,7 @@ public class MeshGenerator : MonoBehaviour
     {
         // Obtenez le composant Renderer du GameObject
         Renderer renderer = player.GetComponent<Renderer>();
-        height = renderer.bounds.size.y;
+        height = renderer.bounds.size.y - 1;
         Debug.Log("Hauteur du GameObject : " + height);
         firstTime = true;
 /*        CreateCube();*/
@@ -117,8 +118,8 @@ public class MeshGenerator : MonoBehaviour
         {
             vertices = new Vector3[]
             {
-                backward + (player.transform.right * -width),
-                backward - (player.transform.right * -width),
+                backward + (player.transform.right * -width) + Vector3.up * offsetY,
+                backward - (player.transform.right * -width) + Vector3.up * offsetY,
                 backward - (player.transform.right * -width) + player.transform.up * height,
                 backward + (player.transform.right * -width) + player.transform.up * height,
             };
@@ -159,8 +160,8 @@ public class MeshGenerator : MonoBehaviour
         if (isEven)
         {
             meshCollider.sharedMesh = meshFilter.mesh;
-            verticesDef.Add(backward + (player.transform.right * -width));
-            verticesDef.Add(backward - (player.transform.right * -width));
+            verticesDef.Add(backward + (player.transform.right * -width) + Vector3.up * offsetY);
+            verticesDef.Add(backward - (player.transform.right * -width) + Vector3.up * offsetY);
             verticesDef.Add(backward - (player.transform.right * -width) + player.transform.up * height);
             verticesDef.Add(backward + (player.transform.right * -width) + player.transform.up * height);
 
@@ -219,8 +220,8 @@ public class MeshGenerator : MonoBehaviour
             meshCollider.sharedMesh = meshFilter.mesh;
             verticesDef.Add(backward + (player.transform.right * -width) + player.transform.up * height);
             verticesDef.Add(backward - (player.transform.right * -width) + player.transform.up * height);
-            verticesDef.Add(backward - (player.transform.right * -width));
-            verticesDef.Add(backward + (player.transform.right * -width));
+            verticesDef.Add(backward - (player.transform.right * -width) + Vector3.up * offsetY);
+            verticesDef.Add(backward + (player.transform.right * -width) + Vector3.up * offsetY);
 
             //left face 
             trianglesDef.Add(x - 4);
