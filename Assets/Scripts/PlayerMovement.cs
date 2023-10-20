@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,30 +33,69 @@ public class PlayerMovement : MonoBehaviour
     public float horizontalInput;
     float verticalInput;
 
+
     Vector3 moveDirection;
 
     Rigidbody rb;
 
     [SerializeField] InputGame _playerInput;
-    public Vector2 _movementInput;
+    private Vector2 _movementInput;
     bool _jumpButton;
-    public float previousHorizontalInput = 0f;
+
+    [SerializeField] bool isPlayer2;
 
     private void Start()
     {
+        //var p = FindObjectOfType<PlayerInputManager>().JoinPlayer(isPlayer2, -1, isPlayer2==1?"Keyboard&Mouse":"ArrowKeyBoard");
+        //p.currentActionMap["Move"].started += PlayerMovement_started;
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        //rb.freezeRotation = true;
 
         readyToJump = true;
+
     }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        if (isPlayer2 == true) return;
+        if (context.phase != InputActionPhase.Started) return;
+        Debug.Log("eee");
+
+        _movementInput = context.ReadValue<Vector2>();
+        //if ( !canMoveInDiagonal)
+        {
+            Debug.Log(_movementInput);
+            transform.Rotate(0, 90f * _movementInput.x, 0);
+        }
+    }
+
 
     private void Update()
     {
+        if(isPlayer2)
+        {
+            if(Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                _movementInput.x = 1f;
+            }
+            else if(Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                _movementInput.x = -1f;
+            }
+            else
+            {
+                _movementInput.x = 0f;
+            }
+            transform.Rotate(0, 90f * _movementInput.x, 0);
+        }
+
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
         MyInput();
         SpeedControl();
+
+        MovePlayer();
 
         // handle drag
         if (grounded)
@@ -66,17 +106,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePlayer();
     }
 
     private void MyInput()
     {
-        if (canMoveInDiagonal)
-        {
-            horizontalInput = _movementInput.x;
-            verticalInput = _movementInput.y;
-        }
-
+        //if (canMoveInDiagonal)
+        //{
+        //    horizontalInput = _movementInput.x;
+        //    verticalInput = _movementInput.y;
+        //}
 
         // when to jump
         if (_jumpButton && readyToJump && grounded)
@@ -92,29 +130,33 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (canMoveInDiagonal)
-        {
-            // calculate movement direction
-            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        //if (canMoveInDiagonal)
+        //{
+        //    // calculate movement direction
+        //    moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-            // on ground
+        //    // on ground
+        //    if (grounded)
+        //        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        //    // in air
+        //    else if (!grounded)
+        //        rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        //}
+        //else
+        {
+            var dir = transform.forward * moveSpeed * 10f;
             if (grounded)
-                rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            {
+                rb.AddForce(dir, ForceMode.Force);
+            }
 
             // in air
             else if (!grounded)
-                rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-        }
-        else
-        {
-            
-            
-            if (grounded)
-                rb.AddForce(transform.forward * moveSpeed * 10f, ForceMode.Force);
+            {
 
-            // in air
-            else if (!grounded)
-                rb.AddForce(transform.forward * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+                rb.AddForce(dir * airMultiplier, ForceMode.Force);
+            }
         }
 
     }
@@ -146,17 +188,6 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
     }
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        _movementInput = context.ReadValue<Vector2>();
-        if (context.started && !canMoveInDiagonal)
-        {
-            horizontalInput = _movementInput.x;
-            transform.Rotate(0, 90f * horizontalInput, 0);
-            Debug.Log(moveDirection);
-        } 
-    }
-
     public void OnJump(InputAction.CallbackContext context)
     {
        if (context.performed)
@@ -168,4 +199,5 @@ public class PlayerMovement : MonoBehaviour
             _jumpButton = false;
         }
     }
+
 }
