@@ -30,10 +30,10 @@ Material:
     - _Pulse_speed: 3
     - _QueueControl: 0
     m_Colors:
-    - _Background_Color: {r: 0.3490566, g: 0.035635132, b: 0, a: 0}
+    - _Background_Color: {r: 0, g: 0.3301887, b: 0.047406353, a: 0}
     - _Cell_size: {r: 1.01, g: 1.01, b: 1.04, a: 0}
-    - _Emission_Color: {r: 0.7383925, g: 0.3537736, b: 1, a: 0}
-    - _Grid_color: {r: 1, g: 0, b: 0.13757896, a: 0}
+    - _Emission_Color: {r: 0.35294116, g: 1, b: 0.39830974, a: 0}
+    - _Grid_color: {r: 0, g: 1, b: 0.008378983, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1492518529552049432
 MonoBehaviour:
