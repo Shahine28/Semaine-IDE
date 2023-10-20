@@ -39,9 +39,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _QueueControl: 0
+    - _Thickness: 0.2
     m_Colors:
-    - _Background_Color: {r: 0.3679245, g: 0.24940816, b: 0.022561418, a: 0}
-    - _Emission_Color: {r: 1, g: 0.903784, b: 0.051886797, a: 0}
-    - _Grid_color: {r: 0.8679245, g: 0.7506831, b: 0.020469915, a: 0}
+    - _Background_Color: {r: 0.121568635, g: 0.16862746, b: 0.3137255, a: 0}
+    - _Cell_size: {r: 10, g: 10, b: 10, a: 0}
+    - _Emission_Color: {r: 0.37981486, g: 0.8252309, b: 0.8867924, a: 0}
+    - _Grid_color: {r: 0.25882354, g: 0.7411765, b: 0.8078432, a: 0}
   m_BuildTextureStacks: []
