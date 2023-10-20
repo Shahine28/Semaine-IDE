@@ -20,19 +20,18 @@ public class Death : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Wall") || collision.transform.CompareTag("Laser"))
+        if (collision.transform.CompareTag("Wall") || collision.transform.CompareTag("Laser") && !m_isDead)
         {
             m_isDead = true;
-            //StopPlayer
             OnDeath.Invoke();
 
             StartCoroutine(DeathAnimation());
-            Destroy(gameObject);
         }
     }
 
     private void EndScreen()
     {
+        Cursor.visible = true;
         m_CanvasParent.ActiveElements(m_isDead);
     }
 
@@ -40,6 +39,9 @@ public class Death : MonoBehaviour
     IEnumerator DeathAnimation()
     {
 
+
+        Time.timeScale = Mathf.Lerp(1.0f, 0.0f, 4);
+        Destroy(gameObject);
         yield return null;
     }
 }

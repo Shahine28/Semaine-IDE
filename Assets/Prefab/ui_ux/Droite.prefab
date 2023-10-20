@@ -194,7 +194,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3109184124681441164}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3390075696592029592}
+        m_TargetAssemblyTypeName: UIEndScreen, Assembly-CSharp
+        m_MethodName: PressQuit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3386557910651038813
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +401,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4045183873512843209}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3390075696592029592}
+        m_TargetAssemblyTypeName: UIEndScreen, Assembly-CSharp
+        m_MethodName: PressPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4909771134871808854
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +466,7 @@ Canvas:
   m_GameObject: {fileID: 4909771134871808854}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -512,3 +536,4 @@ MonoBehaviour:
   m_loseScreen: {fileID: 3386557910651038813}
   m_playButton: {fileID: 4111421964539360051}
   m_quitButton: {fileID: 2505908320383618217}
+  m_playBlue: {fileID: 21300000, guid: 9d466e767f305c749a85adad35f4ee67, type: 3}
