@@ -24,7 +24,7 @@ public class CollectableManager : MonoBehaviour
     {
         GameObject current = Instantiate(m_boostList[Random.Range(0, m_boostList.Length)]);
         current.transform.position = new Vector3(Random.Range(minX + spawnOffset, maxX - spawnOffset),
-                                                 50f, 
+                                                 5f, 
                                                  Random.Range(minZ + spawnOffset, maxZ - spawnOffset));
     }
 }

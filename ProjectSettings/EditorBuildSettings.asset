@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/menue.unity
     guid: 78ff92a64c9ec024bb5c32b3a94341a0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main_zelie.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Shahine.unity
     guid: cf389858beed4b247bff58a387de53e7
   m_configObjects: {}

@@ -58,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isPlayer2 == true) return;
         if (context.phase != InputActionPhase.Started) return;
-        Debug.Log("eee");
 
         _movementInput = context.ReadValue<Vector2>();
         //if ( !canMoveInDiagonal)

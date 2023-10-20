@@ -32,6 +32,7 @@ public class MeshGenerator : MonoBehaviour
     private int cubeCount = 0;
     [SerializeField] private float offset;
     [SerializeField] private float offsetY;
+    [SerializeField] private float offsetX;
 
     // Longueur maximale souhaitée pour le mesh.
     public float maxMeshLength = 10.0f; // Réglez cette valeur en fonction de vos besoins.
@@ -45,7 +46,7 @@ public class MeshGenerator : MonoBehaviour
     {
         // Obtenez le composant Renderer du GameObject
         Renderer renderer = player.GetComponent<Renderer>();
-        height = renderer.bounds.size.y - 1;
+        height = renderer.bounds.size.y;
         Debug.Log("Hauteur du GameObject : " + height);
         firstTime = true;
 /*        CreateCube();*/
@@ -136,7 +137,7 @@ public class MeshGenerator : MonoBehaviour
 
             meshFilter = line.AddComponent<MeshFilter>();
             line.AddComponent<MeshRenderer>().material = tempMaterial;
-            line.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+/*            line.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;*/
 
             meshCollider = line.AddComponent<MeshCollider>();
             meshCollider.sharedMesh = meshFilter.mesh;
