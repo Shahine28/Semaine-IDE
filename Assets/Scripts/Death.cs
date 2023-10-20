@@ -32,6 +32,7 @@ public class Death : MonoBehaviour
     private void EndScreen()
     {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         m_CanvasParent.ActiveElements(m_isDead);
     }
 

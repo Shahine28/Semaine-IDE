@@ -243,7 +243,6 @@ GameObject:
   - component: {fileID: 7823468047706746022}
   - component: {fileID: 6721061398323376785}
   - component: {fileID: 3872556106569484894}
-  - component: {fileID: 3513536503771299322}
   - component: {fileID: 1435850011631684192}
   m_Layer: 0
   m_Name: Player
@@ -326,25 +325,6 @@ MonoBehaviour:
   orientation: {fileID: 560192922772251039}
   horizontalInput: 0
   isPlayer2: 1
---- !u!114 &3513536503771299322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8489839454359592174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9043d4463db8af4e977c5026998965d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_collider: {fileID: 7953420644215273403}
-  m_laserLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  m_nothingLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &1435850011631684192
 MonoBehaviour:
   m_ObjectHideFlags: 0

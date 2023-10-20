@@ -1222,11 +1222,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 688131472241703683, guid: d5ce32e10c5d2bd45b36b056d427631e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -26.299988
-      objectReference: {fileID: 0}
     - target: {fileID: 1283284147019928781, guid: d5ce32e10c5d2bd45b36b056d427631e,
         type: 3}
       propertyPath: m_Name
@@ -1282,16 +1277,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6528397823456832302, guid: d5ce32e10c5d2bd45b36b056d427631e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -71.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 7886590730796186764, guid: d5ce32e10c5d2bd45b36b056d427631e,
-        type: 3}
-      propertyPath: m_PlaneDistance
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1309,21 +1294,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Joueur1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6214867323534645125, guid: 9d4c7cd8620d22c48ad5c900214fb625,
-        type: 3}
-      propertyPath: m_playerLayer.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 6298683419699483676, guid: 9d4c7cd8620d22c48ad5c900214fb625,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8278889568792184095, guid: 9d4c7cd8620d22c48ad5c900214fb625,
-        type: 3}
-      propertyPath: m_PlaneDistance
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8883914758435461491, guid: 9d4c7cd8620d22c48ad5c900214fb625,
         type: 3}
