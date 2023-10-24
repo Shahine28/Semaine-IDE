@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string nameScene)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(nameScene);
+        SceneManager.LoadScene(nameScene);
         // Utilisez UnityEngine.SceneManagement pour spécifier le SceneManager de Unity.
     }
 
