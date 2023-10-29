@@ -167,6 +167,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Dash()
+    {
+        rb.AddForce(transform.forward * moveSpeed * 150f, ForceMode.Impulse);
+    }
+
     private void Jump()
     {
         if (canJump)

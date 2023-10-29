@@ -651,7 +651,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 8896215888964599138}
+  m_LookAt: {fileID: 0}
   m_Follow: {fileID: 8821418045002088145}
   m_CommonLens: 1
   m_Lens:
@@ -979,7 +979,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 8896215888964599138}
+  m_LookAt: {fileID: 0}
   m_Follow: {fileID: 8821418045002088145}
   m_CommonLens: 1
   m_Lens:
@@ -3484,12 +3484,6 @@ Transform:
 --- !u!4 &8821418045002088145 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7823468047706746022, guid: ec6174aa7e3d43c4d915d1ffb6333e22,
-    type: 3}
-  m_PrefabInstance: {fileID: 1655479976511410807}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8896215888964599138 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7893903547875962645, guid: ec6174aa7e3d43c4d915d1ffb6333e22,
     type: 3}
   m_PrefabInstance: {fileID: 1655479976511410807}
   m_PrefabAsset: {fileID: 0}

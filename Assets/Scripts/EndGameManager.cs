@@ -9,8 +9,9 @@ namespace EndGameManagerSpace
 
         private int m_replayCount = 0;
 
-        private void Start()
+        private void Awake()
         {
+            Instance = this;
             m_replayCount = 0;
         }
 
@@ -26,7 +27,7 @@ namespace EndGameManagerSpace
 
         public void QuitGame()
         {
-            Application.Quit();
+            SceneManager.LoadScene(0);
         }
     }
 }

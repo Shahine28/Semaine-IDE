@@ -4,6 +4,10 @@ using UnityEngine;
 public class PlayerPower : MonoBehaviour
 {
     [SerializeField] Collider m_collider;
+    [SerializeField] PlayerMovement m_playerMovement;
+
+    [Header("Input")]
+    [SerializeField] bool m_isPlayer2;
 
     [Header("Layer Mask")]
     [SerializeField] LayerMask m_laserLayer;
@@ -29,6 +33,24 @@ public class PlayerPower : MonoBehaviour
         {
             Debug.Log("No Item Set");
             return false;
+        }
+    }
+
+    private void Update()
+    {
+        if (m_isPlayer2)
+        {
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                ItemUse();
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                ItemUse();
+            }
         }
     }
 
@@ -61,6 +83,8 @@ public class PlayerPower : MonoBehaviour
     private void DashBoost()
     {
         Debug.Log("Dash Activated");
+
+        m_playerMovement.Dash();
 
         m_currentItem = null;
         OnItemUsed.Invoke(transform.tag);

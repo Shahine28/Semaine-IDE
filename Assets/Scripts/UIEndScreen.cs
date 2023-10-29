@@ -17,26 +17,18 @@ public class UIEndScreen : MonoBehaviour
 
     private void Start()
     {
-/*        m_winScreen.SetActive(false);
+        m_winScreen.SetActive(false);
         m_loseScreen.SetActive(false);
         m_playButton.SetActive(false);
-        m_quitButton.SetActive(false);*/
+        m_quitButton.SetActive(false);
     }
 
     public void ActiveElements(bool isDead)
     {
-        Debug.Log("isDead: " + isDead); // Vérifiez la valeur de isDead
-        if (isDead)
-        {
-            Debug.Log("Activating Lose Screen");
-            m_loseScreen.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("Activating Win Screen");
-            m_winScreen.SetActive(true);
-        }
-        m_playButton.SetActive(false);
+        if (isDead) m_loseScreen.SetActive(true);
+        else if (!isDead) m_winScreen.SetActive(true);
+
+        m_playButton.SetActive(true);
         m_quitButton.SetActive(true);
     }
 
