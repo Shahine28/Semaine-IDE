@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string nameScene)
     {
         SceneManager.LoadScene(nameScene);
+        Time.timeScale = 1f;
         // Utilisez UnityEngine.SceneManagement pour spécifier le SceneManager de Unity.
     }
 

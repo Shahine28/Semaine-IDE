@@ -22,6 +22,7 @@ namespace EndGameManagerSpace
             if (m_replayCount >= 2)
             {
                 SceneManager.LoadScene(1);
+                Time.timeScale = 1.0f;
             }
         }
 
